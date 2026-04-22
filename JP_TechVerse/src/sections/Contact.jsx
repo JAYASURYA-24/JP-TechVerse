@@ -5,8 +5,8 @@ const contactInfo = [
   { 
     icon: <Mail className="w-6 h-6" />, 
     label: 'Email', 
-    value: 'contact@jptechverse.com', 
-    href: 'mailto:contact@jptechverse.com' 
+    value: 'contact.jptechverse@gmail.com', 
+    href: 'mailto:contact.jptechverse@gmail.com' 
   },
   { 
     icon: <Phone className="w-6 h-6" />, 
