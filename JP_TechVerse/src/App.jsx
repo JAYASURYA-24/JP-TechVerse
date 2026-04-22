@@ -1,9 +1,13 @@
 import { lazy, Suspense } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './sections/Hero';
-import ScrollToTop from './components/ui/ScrollToTop';
+import FloatingActions from './components/ui/FloatingActions';
 import CTABanner from './components/ui/CTABanner';
+import LegalPage from './pages/LegalPage';
+import { privacyPolicyContent, termsOfServiceContent } from './constants/legal';
 
 // Lazy load below-the-fold sections for better performance
 const Services = lazy(() => import('./sections/Services'));
@@ -31,7 +35,50 @@ const SectionSkeleton = () => (
   </div>
 );
 
+function LandingPage() {
+  return (
+    <main id="main-content">
+      {/* Hero — eagerly loaded (above the fold) */}
+      <Hero />
+
+      {/* Lazy-loaded sections */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <Services />
+      </Suspense>
+
+      <Suspense fallback={<SectionSkeleton />}>
+        <Projects />
+      </Suspense>
+
+      <Suspense fallback={<SectionSkeleton />}>
+        <About />
+      </Suspense>
+
+      <Suspense fallback={<SectionSkeleton />}>
+        <WhyUs />
+      </Suspense>
+
+      <CTABanner />
+
+      <Suspense fallback={<SectionSkeleton />}>
+        <Testimonials />
+      </Suspense>
+
+      <Suspense fallback={<SectionSkeleton />}>
+        <Contact />
+      </Suspense>
+    </main>
+  );
+}
+
 export default function App() {
+  const { pathname } = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-brand-bg">
       {/* Skip to main content for accessibility */}
@@ -45,49 +92,23 @@ export default function App() {
       {/* Sticky Navigation */}
       <Navbar />
 
-      {/* Main Content */}
-      <main id="main-content">
-        {/* Hero — eagerly loaded (above the fold) */}
-        <Hero />
-
-        {/* Lazy-loaded sections */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <Services />
-        </Suspense>
-
-        <Suspense fallback={<SectionSkeleton />}>
-          <Projects />
-        </Suspense>
-
-
-
-        <Suspense fallback={<SectionSkeleton />}>
-          <About />
-        </Suspense>
-
-
-
-
-        <Suspense fallback={<SectionSkeleton />}>
-          <WhyUs />
-        </Suspense>
-
-        <CTABanner />
-
-        <Suspense fallback={<SectionSkeleton />}>
-          <Testimonials />
-        </Suspense>
-
-        <Suspense fallback={<SectionSkeleton />}>
-          <Contact />
-        </Suspense>
-      </main>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route 
+          path="/privacy" 
+          element={<LegalPage title="Privacy Policy" content={privacyPolicyContent} />} 
+        />
+        <Route 
+          path="/terms" 
+          element={<LegalPage title="Terms of Service" content={termsOfServiceContent} />} 
+        />
+      </Routes>
 
       {/* Footer */}
       <Footer />
 
-      {/* Scroll to Top FAB */}
-      <ScrollToTop />
+      {/* Floating Action Buttons (Call, WhatsApp, Scroll Top) */}
+      <FloatingActions />
     </div>
   );
 }

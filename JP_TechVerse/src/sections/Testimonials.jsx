@@ -3,17 +3,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedSection from '../components/ui/AnimatedSection';
 
 const testimonials = [
-  { name: 'Arun Kumar', role: 'Founder, StartupXY', avatar: 'AK', rating: 5, text: 'JP TechVerse delivered our app on time and exceeded all expectations. The UI was stunning and the code quality was excellent.', company: 'E-Commerce' },
-  { name: 'Priya Sharma', role: 'CEO, HealthTech Co.', avatar: 'PS', rating: 5, text: 'The team built our entire healthcare platform within 6 weeks. Real-time features, beautiful design — everything worked perfectly.', company: 'Healthcare' },
-  { name: 'Mohammed Ali', role: 'CTO, LogisticsPro', avatar: 'MA', rating: 5, text: 'Affordable pricing, fast turnaround, and top-notch technical skills. Our delivery tracking app got amazing reviews.', company: 'Logistics' },
+  { name: 'Raj', role: 'Founder, Sastha Traders', avatar: 'RJ', rating: 5, text: 'JP TechVerse delivered our Billing app on time and exceeded all expectations. The UI was stunning and the code quality was excellent.' },
+  { name: 'Amutha', role: 'Student, Solvex Application', avatar: 'AM', rating: 5, text: 'The team built our entire final year project within 3 weeks. Real-time features, beautiful design — everything worked perfectly.'},
+  { name: 'Johindan', role: 'CEO, SAT Contract Services', avatar: 'JO', rating: 5, text: 'Affordable pricing, fast turnaround, and top-notch technical skills. Our website is stunning' },
 ];
 
 const techLogos = [
-  { name: 'Flutter', icon: '🎯' }, { name: 'React', icon: '⚛️' },
-  { name: 'Firebase', icon: '🔥' }, { name: 'Node.js', icon: '💚' },
-  { name: 'Next.js', icon: '▲' }, { name: 'PostgreSQL', icon: '🐘' },
-  { name: 'Python', icon: '🐍' }, { name: 'AWS', icon: '☁️' },
-  { name: 'Figma', icon: '🎨' }, { name: 'Docker', icon: '🐳' },
+  { name: 'Flutter', icon: 'https://cdn.simpleicons.org/flutter' },
+  { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
+  { name: 'Firebase', icon: 'https://cdn.simpleicons.org/firebase' },
+  { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs' },
+  { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
+  { name: 'PostgreSQL', icon: 'https://cdn.simpleicons.org/postgresql' },
+  { name: 'Python', icon: 'https://cdn.simpleicons.org/python' },
+  { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
+  { name: 'Figma', icon: 'https://cdn.simpleicons.org/figma' },
+  { name: 'Docker', icon: 'https://cdn.simpleicons.org/docker' },
+  { name: 'Golang', icon: 'https://cdn.simpleicons.org/go' },
 ];
 
 const StarRating = ({ count = 5 }) => (
@@ -26,11 +32,11 @@ const StarRating = ({ count = 5 }) => (
   </div>
 );
 
-const TestimonialCard = ({ name, role, avatar, rating, text, company }) => (
+const TestimonialCard = ({ name, role, avatar, rating, text }) => (
   <article className="glass-card p-8 flex flex-col gap-5 transition-colors duration-200 h-full">
     <div className="flex justify-between items-start">
       <StarRating count={rating} />
-      <span className="tech-badge text-xs">{company}</span>
+     
     </div>
     <blockquote className="text-base leading-relaxed flex-1 italic" style={{ color: 'var(--text-secondary)' }}>
       "{text}"
@@ -135,11 +141,12 @@ export default function Testimonials() {
               {[...techLogos, ...techLogos, ...techLogos].map((tech, i) => (
                 <div key={`${tech.name}-${i}`}
                   className="flex items-center gap-3 px-5 py-3 rounded-2xl flex-shrink-0 transition-colors duration-200 glass-card">
-                  <span className="text-xl" role="img" aria-label={tech.name}>{tech.icon}</span>
+                  <img src={tech.icon} alt={tech.name} className="w-6 h-6 object-contain" />
                   <span className="text-sm font-medium whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>{tech.name}</span>
                 </div>
               ))}
             </div>
+
           </div>
         </div>
       </div>

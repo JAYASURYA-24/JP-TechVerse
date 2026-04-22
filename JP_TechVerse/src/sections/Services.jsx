@@ -36,7 +36,7 @@ const services = [
 
 const ServiceCard = ({ icon, title, description, tags, index }) => (
   <AnimatedSection delay={(index % 4) * 100} className="group h-full">
-    <article className="glass-card p-7 h-full flex flex-col gap-5 cursor-default hover:scale-[1.02] transition-transform duration-300">
+    <article className="glass-card p-7 h-full flex flex-col gap-5 hover:scale-[1.02] transition-transform duration-300">
       {/* Icon with themed color */}
       <div className="w-14 h-14 rounded-2xl flex items-center justify-center
         group-hover:scale-110 transition-transform duration-300"
@@ -57,14 +57,17 @@ const ServiceCard = ({ icon, title, description, tags, index }) => (
         {tags.map(tag => <span key={tag} className="tech-badge">{tag}</span>)}
       </div>
 
-      <div className="flex items-center gap-1.5 text-sm font-medium opacity-100
-        translate-y-1 group-hover:translate-y-0 transition-all duration-300"
+      <a 
+        href="#projects"
+        onClick={e => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
+        className="flex items-center gap-1.5 text-sm font-medium opacity-100
+        translate-y-1 group-hover:translate-y-0 transition-all duration-300 w-fit hover:underline"
         style={{ color: 'var(--accent)' }}>
         <span>Learn more</span>
         <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
         </svg>
-      </div>
+      </a>
     </article>
   </AnimatedSection>
 );

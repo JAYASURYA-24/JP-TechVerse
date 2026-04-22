@@ -1,42 +1,43 @@
 import { useEffect, useRef, useState } from 'react';
+import { IndianRupee, Zap, TrendingUp, Palette, ShieldCheck, Headset } from 'lucide-react';
 import AnimatedSection from '../components/ui/AnimatedSection';
 
 const features = [
   {
-    icon: '💰',
+    icon: <IndianRupee className="w-6 h-6" />,
     title: 'Affordable Pricing',
     points: ['Premium quality at startup-friendly prices.', 'Transparent quotes, no hidden fees.'],
-    color: '#059669'
+    color: '#059669' // Emerald
   },
   {
-    icon: '⚡',
+    icon: <Zap className="w-6 h-6" />,
     title: 'Fast Delivery',
     points: ['MVPs in 2–4 weeks.', 'Agile process with fast iterations.'],
-    color: 'var(--accent)'
+    color: '#2563eb' // Blue
   },
   {
-    icon: '📈',
+    icon: <TrendingUp className="w-6 h-6" />,
     title: 'Scalable Solutions',
     points: ['Built to grow with your business.', 'From 10 users to millions.'],
-    color: '#7c3aed'
+    color: '#7c3aed' // Violet
   },
   {
-    icon: '🎨',
+    icon: <Palette className="w-6 h-6" />,
     title: 'Modern UI/UX',
     points: ['Clean, intuitive designs users love.', 'Built to reflect your brand.'],
-    color: '#e11d48'
+    color: '#e11d48' // Rose
   },
   {
-    icon: '🔒',
+    icon: <ShieldCheck className="w-6 h-6" />,
     title: 'Secure & Reliable',
     points: ['Security-first development approach.', 'Built using industry best practices.'],
-    color: '#d97706'
+    color: '#d97706' // Amber
   },
   {
-    icon: '🛎️',
+    icon: <Headset className="w-6 h-6" />,
     title: '24/7 Support',
     points: ["We stay with you after launch.", "Reliable support whenever you need it."],
-    color: '#0284c7'
+    color: '#0284c7' // Sky
   },
 ];
 
@@ -111,10 +112,14 @@ export default function WhyUs() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feat, i) => (
             <AnimatedSection key={feat.title} delay={(i % 3) * 100}>
-              <div className="glass-card p-7 group hover:scale-[1.02] transition-all duration-300 h-full flex flex-col gap-4">
+              <div className="glass-card p-7 group hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col gap-4">
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl
                   group-hover:scale-110 transition-transform duration-300"
-                  style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
+                  style={{ 
+                    background: `${feat.color}15`, 
+                    border: `1px solid ${feat.color}30`,
+                    color: feat.color
+                  }}>
                   {feat.icon}
                 </div>
                 <div className="flex-1">

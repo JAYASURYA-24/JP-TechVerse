@@ -1,17 +1,21 @@
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
 const quickLinks = [
   { label: 'Home', href: '#home' },
-  { label: 'About Us', href: '#about' },
+  { label: 'Services', href: '#services' },
   { label: 'Projects', href: '#projects' },
+  { label: 'About', href: '#about' },
   { label: 'Why Us', href: '#why-us' },
+  { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
 ];
 
 const services = [
-  { label: 'App Development', href: '#services' },
+  { label: 'Mobile App Development', href: '#services' },
   { label: 'Web Development', href: '#services' },
-  { label: 'Custom Software', href: '#services' },
+  { label: 'Branding & Design', href: '#services' },
   { label: 'UI/UX Design', href: '#services' },
-  { label: 'Firebase Solutions', href: '#services' },
+  { label: 'Cloud Solutions', href: '#services' },
 ];
 
 const socials = [
@@ -22,7 +26,19 @@ const socials = [
 ];
 
 export default function Footer() {
-  const go = (href) => { document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }); };
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const go = (href) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <footer className="relative border-t" style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }} role="contentinfo">
@@ -36,16 +52,6 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <a href="#home" onClick={e => { e.preventDefault(); go('#home'); }} className="flex items-center gap-2.5 mb-4">
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-                <rect width="36" height="36" rx="10" fill="url(#footerGrad)" />
-                <path d="M10 26V10h6l4 8 4-8h6v16h-4V16l-4 8h-4l-4-8v10H10z" fill="white" />
-                <defs>
-                  <linearGradient id="footerGrad" x1="0" y1="0" x2="36" y2="36">
-                    <stop stopColor="#2563eb" />
-                    <stop offset="1" stopColor="#60a5fa" />
-                  </linearGradient>
-                </defs>
-              </svg>
               <span className="text-xl font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>
                 JP <span className="gradient-text">TechVerse</span>
               </span>
@@ -114,9 +120,9 @@ export default function Footer() {
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>© 2026 JP TechVerse. All rights reserved.</p>
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Crafted with ❤️ in India · Built for the World</p>
           <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--text-muted)' }}>
-            <a href="#" className="hover:text-current transition-colors" style={{ color: 'var(--text-muted)' }}>Privacy Policy</a>
+            <Link to="/privacy" className="hover:text-current transition-colors" style={{ color: 'var(--text-muted)' }}>Privacy Policy</Link>
             <span>·</span>
-            <a href="#" className="hover:text-current transition-colors" style={{ color: 'var(--text-muted)' }}>Terms of Service</a>
+            <Link to="/terms" className="hover:text-current transition-colors" style={{ color: 'var(--text-muted)' }}>Terms of Service</Link>
           </div>
         </div>
       </div>

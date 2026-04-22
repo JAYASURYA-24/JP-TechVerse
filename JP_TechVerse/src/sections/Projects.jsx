@@ -3,12 +3,54 @@ import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedSection from '../components/ui/AnimatedSection';
 
 const projects = [
-  { id: 1, title: 'Shine-Up Platform', description: 'Full-service booking platform with customer, partner, and admin apps. Real-time tracking, OTP verification, and payment integration.', category: 'app', tech: ['Flutter', 'Go', 'Firebase', 'PostgreSQL'], color: 'from-blue-500 to-cyan-500', icon: '✨', liveUrl: '#' },
-  { id: 2, title: 'E-Commerce Dashboard', description: 'Modern admin dashboard for e-commerce with analytics, inventory management, and real-time sales tracking.', category: 'web', tech: ['React.js', 'Node.js', 'MongoDB', 'Chart.js'], color: 'from-violet-500 to-purple-600', icon: '🛒', liveUrl: '#' },
-  { id: 3, title: 'HealthCare App', description: 'Doctor appointment booking app with video consultations, prescription management, and health records.', category: 'app', tech: ['Flutter', 'Firebase', 'WebRTC', 'Razorpay'], color: 'from-emerald-500 to-teal-500', icon: '🏥', liveUrl: '#' },
-  { id: 4, title: 'Digital Agency Website', description: 'Premium marketing website for a digital agency with animations, contact form, and portfolio showcase.', category: 'web', tech: ['React.js', 'Tailwind CSS', 'Firebase', 'Vite'], color: 'from-rose-500 to-pink-600', icon: '🎯', liveUrl: '#' },
-  { id: 5, title: 'Food Delivery App', description: 'Location-based food delivery app with real-time order tracking, push notifications, and multi-restaurant support.', category: 'app', tech: ['Flutter', 'Node.js', 'Socket.io', 'Firebase'], color: 'from-orange-500 to-amber-500', icon: '🍔', liveUrl: '#' },
-  { id: 6, title: 'SaaS Analytics Platform', description: 'Business intelligence platform with custom dashboards, data visualization, and automated reporting.', category: 'web', tech: ['Next.js', 'Python', 'PostgreSQL', 'D3.js'], color: 'from-sky-500 to-blue-600', icon: '📊', liveUrl: '#' },
+  { 
+    id: 1, 
+    title: 'Sastha Traders Billing App', 
+    description: 'A mobile billing and invoicing application featuring real-time revenue analytics, pending invoice tracking, and seamless on-the-go invoice generation.', 
+    category: 'app', 
+    tech: ['Flutter', 'Firebase', 'Razorpay'], 
+    image: '/projects/sastha_mobile.png',
+  },
+  { 
+    id: 2, 
+    title: 'Solvex Compliant Register', 
+    description: 'A compliant mobile register application featuring digital inspection logs, compliance checklists, and secure e-signatures for streamlined auditing.', 
+    category: 'app', 
+    tech: ['Flutter', 'Firebase', 'Golang', 'PostgreSQL'], 
+    image: '/projects/solvex_mobile.png',
+  },
+  { 
+    id: 3, 
+    title: 'SAT Contract Services Website', 
+    description: 'A stunning corporate marketing website designed to establish a premium brand presence with high-performance animations and contact workflows.', 
+    category: 'web', 
+    tech: ['React.js', 'Firebase', 'Vercel'], 
+    image: '/projects/sat.png',
+  },
+  { 
+    id: 4, 
+    title: 'VitalTrack Mobile App', 
+    description: 'A modern health and fitness tracking iOS/Android application featuring daily custom activity rings, real-time workout maps, and heart rate analytics.', 
+    category: 'app', 
+    tech: ['Flutter', 'Firebase', 'Google Maps API', 'HealthKit'], 
+    image: '/projects/health_app.png',
+  },
+  { 
+    id: 5, 
+    title: 'Aurora AI Workspace', 
+    description: 'A high-end SaaS dashboard powered by Generative AI. Designed for enterprise users to visualize real-time analytics, prompt outputs, and global map activity.', 
+    category: 'web', 
+    tech: ['React.js', 'Tailwind CSS', 'Recharts', 'OpenAI'], 
+    image: '/projects/saas.png',
+  },
+  { 
+    id: 6, 
+    title: 'Aethel E-Commerce Store', 
+    description: 'An elegant e-commerce storefront crafted for effortless shopping, boasting a minimalist interface, fast dynamic cart, and seamless secure checkout.', 
+    category: 'web', 
+    tech: ['React.js', 'Razorpay', 'Zustand', 'Vercel'], 
+    image: '/projects/ecommerce.png',
+  },
 ];
 
 const filters = [
@@ -18,27 +60,21 @@ const filters = [
 ];
 
 const ProjectCard = ({ project }) => (
-  <article className="glass-card overflow-hidden group hover:scale-[1.02] transition-all duration-300 flex flex-col h-full">
-    <div className={`relative h-48 bg-gradient-to-br ${project.color} flex items-center justify-center overflow-hidden`}>
-      <div className="absolute inset-0 opacity-10"
-        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-      <span className="text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300" role="img" aria-label={project.title}>{project.icon}</span>
-      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-        <a href={project.liveUrl}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black text-sm font-bold hover:bg-blue-50 transition-colors"
-          aria-label={`View ${project.title}`}>
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-          View Project
-        </a>
-      </div>
-      <span className="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full font-medium bg-black/40 text-white border border-white/20">
+  <article className="glass-card overflow-hidden group hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full shadow-lg">
+    <div className={`relative h-56 bg-gray-100 flex items-center justify-center overflow-hidden border-b`} style={{ borderColor: 'var(--border)' }}>
+      <img 
+        src={project.image} 
+        alt={project.title} 
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+      />
+      <span className="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full font-medium bg-black/60 text-white backdrop-blur-md border border-white/20">
         {project.category === 'app' ? '📱 App' : '🌐 Website'}
       </span>
     </div>
     <div className="p-6 flex flex-col flex-1" style={{ background: 'var(--surface)' }}>
       <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--text-primary)' }}>{project.title}</h3>
       <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-muted)' }}>{project.description}</p>
-      <div className="flex flex-wrap gap-2 mt-4">
+      <div className="flex flex-wrap gap-2 mt-5">
         {project.tech.map(t => <span key={t} className="tech-badge">{t}</span>)}
       </div>
     </div>

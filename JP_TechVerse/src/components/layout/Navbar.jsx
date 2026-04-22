@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const navLinks = [
   { label: 'Home',     href: '#home' },
@@ -9,26 +10,16 @@ const navLinks = [
   { label: 'Contact',  href: '#contact' },
 ];
 
-const LogoIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="36" height="36" rx="10" fill="url(#logoGrad)" />
-    <path d="M10 26V10h6l4 8 4-8h6v16h-4V16l-4 8h-4l-4-8v10H10z" fill="white" />
-    <defs>
-      <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#3B82F6" />
-        <stop offset="1" stopColor="#60A5FA" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
 export default function Navbar() {
   const [scrolled, setScrolled]     = useState(false);
   const [menuOpen, setMenuOpen]     = useState(false);
   const [activeSection, setActive]  = useState('home');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
+      if (location.pathname !== '/') return;
       setScrolled(window.scrollY > 20);
       const sections = navLinks.map(l => l.href.slice(1));
       for (const id of [...sections].reverse()) {
@@ -38,11 +29,18 @@ export default function Navbar() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [location.pathname]);
 
   const go = (href) => {
     setMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const navBg = scrolled
@@ -59,7 +57,6 @@ export default function Navbar() {
             {/* Logo */}
             <a href="#home" onClick={e => { e.preventDefault(); go('#home'); }}
               className="flex items-center gap-2.5" aria-label="JP TechVerse Home">
-              <LogoIcon />
               <span className="text-lg font-black tracking-tight text-white">
                 JP <span className="gradient-text">TechVerse</span>
               </span>
